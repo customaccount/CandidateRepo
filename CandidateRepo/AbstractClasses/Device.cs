@@ -1,11 +1,13 @@
-﻿using System;
+﻿using CandidateRepo.Classes;
+using CandidateRepo.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CandidateRepo
+namespace CandidateRepo.AbstractClasses
 {
     public abstract class Device : IBaseDevice
     {
@@ -77,16 +79,4 @@ namespace CandidateRepo
             return 0;
         }
     }
-
-    public class NameAttribute : System.Attribute
-    {
-        public string Name { get; set; }
-
-        public NameAttribute(string name)
-        {
-            Name = name;
-        }
-    }
-
-
 }

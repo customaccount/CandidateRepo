@@ -43,15 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractClasses.cs" />
-    <Compile Include="ConcreteDevices.cs" />
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="ConsoleInterface.cs" />
+    <Compile Include="AbstractClasses\Device.cs" />
+    <Compile Include="Classes\ConsoleInterface.cs" />
+    <Compile Include="Classes\Hub.cs" />
+    <Compile Include="Classes\Humidifier.cs" />
+    <Compile Include="Classes\NameAttribute.cs" />
+    <Compile Include="Classes\SmartLightSystem.cs" />
+    <Compile Include="Classes\TermControlSystem.cs" />
+    <Compile Include="Interfaces\IBaseDevice.cs" />
+    <Compile Include="Interfaces\IHub.cs" />
+    <Compile Include="Interfaces\IHumidifier.cs" />
+    <Compile Include="Interfaces\ISmartLightSystem.cs" />
+    <Compile Include="Interfaces\ITermControlSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CandidateRepo.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,9 @@ namespace CandidateRepo
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Black;
             ConsoleInterface.Initialize();
+            Console.ForegroundColor = ConsoleColor.White;
             ConsoleInterface.StartInterface();
         }
     }
