@@ -12,6 +12,7 @@ namespace CandidateRepo.Classes
     static class ConsoleInterface
     {
         static List<Device> devices = new List<Device>();
+
         public static void Initialize()
         {
             var h1 = new Hub("Hub1");
@@ -135,7 +136,7 @@ namespace CandidateRepo.Classes
 
         static int CreateNewDevice()
         {
-            Type myType = Type.GetType("CandidateRepo.Device", false, true);
+            Type myType = Type.GetType("CandidateRepo.AbstractClasses.Device", false, true);
             var assembly = Assembly.GetAssembly(myType);
             var types = assembly.GetTypes().Where(t => t.CustomAttributes.ToList().Count > 0);
             types = types.Where(t => t.CustomAttributes.ToList()[0].ConstructorArguments.ToList().Count > 0).ToList();
