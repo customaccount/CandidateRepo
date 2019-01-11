@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CandidateRepo.Interfaces
 {
-    interface IHumidifier
+    interface IHumidifier : IBaseDevice
     {
         void Evaporate();
     }

@@ -12,6 +12,7 @@ namespace CandidateRepo.Classes
     static class ConsoleInterface
     {
         static List<Device> devices = new List<Device>();
+        static CreatorOfDevices creator = new CreatorOfDevices();
 
         public static void Initialize()
         {
@@ -111,25 +112,23 @@ namespace CandidateRepo.Classes
 
         static int ShowMethods(List<MethodInfo> methodInfos, Device device)
         {
+            Console.Clear();
+            Console.WriteLine($"Device {device.Name} has this commands:");
+            int i = 1;
+            foreach (var item in methodInfos)
+            {
+                Console.WriteLine($"{i}. {item.CustomAttributes.ToList()[0].ConstructorArguments.ToList()[0].Value}");
+                i++;
+            }
+            Console.WriteLine("Please type number of command to execute it, or type \"b\" to go back");
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine($"Device {device.Name} has this commands:");
-                int i = 1;
-                foreach (var item in methodInfos)
-                {
-                    Console.WriteLine($"{i}. {item.CustomAttributes.ToList()[0].ConstructorArguments.ToList()[0].Value}");
-                    i++;
-                }
-                Console.WriteLine("Please type number of command to execute it, or type \"b\" to go back");
-
                 string input = Console.ReadLine();
                 if (input.ToLower() == "b") return 1;
                 if ((Int32.TryParse(input, out int result)) && (result <= methodInfos.Count) && (result > 0))
                 {
                     device.ExecuteMethod(methodInfos[result - 1].CustomAttributes.ToList()[0].ConstructorArguments.ToList()[0].Value.ToString());
                     Console.WriteLine("\nComand completed. Please type the nubmer of new command, or type \"b\" to go back");
-                    Console.ReadKey();
                 }
             }
         }
@@ -159,8 +158,9 @@ namespace CandidateRepo.Classes
                     Console.WriteLine("Please enter device name:");
                     string name = Console.ReadLine();
                     Type type = types.ToList()[result - 1];
-                    var constructors = type.GetConstructors().ToList();
-                    var device = constructors.ToList()[0].Invoke(new object[] { name });
+
+                    var device = creator.CreateDevice(type, name);
+                    devices.Add(device);
                     bool complete = false;
                     Console.WriteLine($"Device {name} created.");
                     while (!complete)

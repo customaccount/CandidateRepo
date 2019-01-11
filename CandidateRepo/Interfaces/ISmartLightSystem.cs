@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CandidateRepo.Interfaces
 {
-    interface ISmartLightSystem
+    interface ISmartLightSystem : IBaseDevice
     {
         void LightsOn();
         void LightsOff();

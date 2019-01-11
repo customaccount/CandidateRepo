@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CandidateRepo.Interfaces
 {
-    interface IHub
+    interface IHub : IBaseDevice
     {
         void RegisterDevice(Device device);
         List<Device> GetRegisteredDevices();
     }
+
 }

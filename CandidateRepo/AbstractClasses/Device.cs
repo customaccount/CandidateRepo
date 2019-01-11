@@ -43,7 +43,7 @@ namespace CandidateRepo.AbstractClasses
                     var hub = hubs[hubres - 1];
                     (hub as Hub).RegisterDevice(this as Device);
                     complete = true;
-                    Console.ReadKey();
+                    //Console.ReadKey();
                 }
             }
         }

@@ -45,12 +45,14 @@
   <ItemGroup>
     <Compile Include="AbstractClasses\Device.cs" />
     <Compile Include="Classes\ConsoleInterface.cs" />
+    <Compile Include="Classes\CreatorDevices.cs" />
     <Compile Include="Classes\Hub.cs" />
     <Compile Include="Classes\Humidifier.cs" />
     <Compile Include="Classes\NameAttribute.cs" />
     <Compile Include="Classes\SmartLightSystem.cs" />
     <Compile Include="Classes\TermControlSystem.cs" />
     <Compile Include="Interfaces\IBaseDevice.cs" />
+    <Compile Include="Interfaces\ICreator.cs" />
     <Compile Include="Interfaces\IHub.cs" />
     <Compile Include="Interfaces\IHumidifier.cs" />
     <Compile Include="Interfaces\ISmartLightSystem.cs" />
