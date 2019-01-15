@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CandidateRepo.Interfaces
+﻿namespace CandidateRepo.Interfaces
 {
-    interface IBaseDevice
+    public interface IBaseDevice
     {
+        string Name { get; }
         void Reboot();
         void GetCurrentState();
         void UpdateParams();

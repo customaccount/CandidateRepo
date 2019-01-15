@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CandidateRepo.Interfaces
+﻿namespace CandidateRepo.Interfaces
 {
-    interface IHumidifier : IBaseDevice
+    public interface IHumidifier : IBaseDevice
     {
         void Evaporate();
     }

@@ -4,14 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CandidateRepo.AbstractClasses
 {
     public abstract class Device : IBaseDevice
     {
         public string Name { get; }
+        IDeviceManager _deviceManager;
         protected string State { get; set; }
         protected string Params { get; set; }
 
@@ -32,18 +31,17 @@ namespace CandidateRepo.AbstractClasses
             {
                 Console.WriteLine("Please choose the hub, you want to register it");
 
-                var hubs = ConsoleInterface.GetDevicesList().Where(d => (d is IHub)).ToList();
+                var hubs = _deviceManager.GetDevices(typeof(IHub)).ToList();
                 for (int j = 1; j <= hubs.Count; j++)
                 {
-                    Console.WriteLine($"{j}. {hubs[j - 1].Name}");
+                    Console.WriteLine($"{j}. {(hubs[j - 1] as IBaseDevice).Name}");
                 }
-                string hubnomber = Console.ReadLine();
-                if ((Int32.TryParse(hubnomber, out int hubres)) && (hubres <= hubs.Count) && (hubres > 0))
+                string hubnumber = Console.ReadLine();
+                if ((Int32.TryParse(hubnumber, out int hubres)) && (hubres <= hubs.Count) && (hubres > 0))
                 {
                     var hub = hubs[hubres - 1];
-                    (hub as Hub).RegisterDevice(this as Device);
+                    (hub as IHub).RegisterDevice(this as IBaseDevice);
                     complete = true;
-                    //Console.ReadKey();
                 }
             }
         }
@@ -56,25 +54,35 @@ namespace CandidateRepo.AbstractClasses
             Console.WriteLine($"Parameters of device {Name} updated to {Params}");
         }
 
-        public Device(string name)
+        public Device(string name, IDeviceManager manager)
         {
             Name = name;
+            _deviceManager = manager;
         }
 
-        public List<MethodInfo> GetMethods()
+        public Dictionary<string,MethodInfo> GetMethods()
         {
             Type type = this.GetType();
             var methods = type.GetMethods().Where(m => (m.CustomAttributes.ToList().Count > 0)).ToList();
-            methods = methods.Where(m => m.CustomAttributes.ToList()[0].ConstructorArguments.ToList().Count > 0).ToList();
-            return methods;
+            Dictionary<string, MethodInfo> result = new Dictionary<string, MethodInfo>();
+            foreach (var item in methods)
+            {
+                var ca = item.CustomAttributes.ToList();
+                foreach (var attr in ca)
+                {
+                    if (attr.AttributeType.FullName == "CandidateRepo.Classes.NameAttribute")
+                    {
+                        string methodName = attr.ConstructorArguments[0].Value.ToString();
+                        result.Add(methodName, item);
+                    }
+                }
+            }
+
+            return result;
         }
 
-        public int ExecuteMethod(string methodName)
+        public int ExecuteMethod(MethodInfo method)
         {
-            Type type = this.GetType();
-            var methods = type.GetMethods().Where(m => (m.CustomAttributes.ToList().Count > 0)).ToList();
-            methods = methods.Where(m => m.CustomAttributes.ToList()[0].ConstructorArguments.ToList().Count > 0).ToList();
-            var method = methods.Where(m => m.CustomAttributes.ToList()[0].ConstructorArguments.ToList()[0].Value.ToString() == methodName).FirstOrDefault();
             method.Invoke(this, null);
             return 0;
         }

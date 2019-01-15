@@ -1,21 +1,15 @@
 ﻿using CandidateRepo.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo
 {
     class Program
     {
+        static IDeviceManager _deviceManager = DeviceManager.GetDeviceManager();
+        static IConsoleInterface _consoleInterface = new ConsoleInterface(_deviceManager);
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Black;
-            ConsoleInterface.Initialize();
-            Console.ForegroundColor = ConsoleColor.White;
-            ConsoleInterface.StartInterface();
+            _consoleInterface.StartInterface();
         }
     }
 }

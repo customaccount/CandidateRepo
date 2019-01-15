@@ -1,16 +1,10 @@
-﻿using CandidateRepo.AbstractClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CandidateRepo.Interfaces
 {
-    interface IHub : IBaseDevice
+    public interface IHub : IBaseDevice
     {
-        void RegisterDevice(Device device);
-        List<Device> GetRegisteredDevices();
+        void RegisterDevice(IBaseDevice device);
+        IEnumerable<IBaseDevice> GetRegisteredDevices();
     }
-
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CandidateRepo.Interfaces
+﻿namespace CandidateRepo.Interfaces
 {
-    interface ITermControlSystem : IBaseDevice
+    public interface ITermControlSystem : IBaseDevice
     {
         void FastFreeze();
     }

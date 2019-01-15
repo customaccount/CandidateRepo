@@ -2,23 +2,20 @@
 using CandidateRepo.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CandidateRepo.Classes
 {
     public class Hub : Device, IHub
     {
-        List<Device> registeredDevices;
+        List<IBaseDevice> _registeredDevices;
 
-        public Hub(string name) : base(name)
+        public Hub(string name, IDeviceManager manager) : base(name, manager)
         {
-            registeredDevices = new List<Device>();
+            _registeredDevices = new List<IBaseDevice>();
             State = "normal";
         }
 
-        public void RegisterDevice(Device device)
+        public void RegisterDevice(IBaseDevice device)
         {
             if (this.Equals(device))
             {
@@ -26,10 +23,10 @@ namespace CandidateRepo.Classes
             }
             else
             {
-                if (registeredDevices.Contains(device)) Console.WriteLine($"Device {device.Name} was already registered.");
+                if (_registeredDevices.Contains(device)) Console.WriteLine($"Device {device.Name} was already registered.");
                 else
                 {
-                    registeredDevices.Add(device);
+                    _registeredDevices.Add(device);
                     Console.WriteLine($"Device {device.Name} registered on hub {Name}");
                 }
             }
@@ -38,19 +35,20 @@ namespace CandidateRepo.Classes
         public override void GetCurrentState()
         {
             Console.WriteLine($"Currently state: {State}");
-            if (registeredDevices.Count > 0)
+            if (_registeredDevices.Count > 0)
             {
-                Console.WriteLine($"Connected {registeredDevices.Count} devices");
-                foreach (var item in registeredDevices)
+                Console.WriteLine($"Connected {_registeredDevices.Count} devices");
+                foreach (var item in _registeredDevices)
                 {
                     Console.WriteLine(item.Name);
                 }
             }
         }
 
-        public List<Device> GetRegisteredDevices()
+        public IEnumerable<IBaseDevice> GetRegisteredDevices()
         {
-            return registeredDevices;
+            return _registeredDevices;
         }
+
     }
 }
