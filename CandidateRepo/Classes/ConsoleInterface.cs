@@ -73,34 +73,24 @@ namespace CandidateRepo.Classes
             if (input.ToLower() == "b") return 1;
             if ((Int32.TryParse(input, out int result)) && (result <= hubDevices.Count) && (result > 0))
             {
-                var device = hubDevices[result - 1];
+                var device = hubDevices[result - 1] as Device;
                 int showMethodsresult = 0;
                 while (showMethodsresult == 0)
                 {
-                    if (device is Device)
-                    {
-                        var methodsDict = (device as Device).GetMethods();
-                        showMethodsresult = ShowMethods(methodsDict, device as Device);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Could not read device funcs");
-                        Console.ReadKey();
-                        showMethodsresult = 1;
-                    }
+                    var methods = device.GetCommands(new Dispetcher(device));
+                    showMethodsresult = ShowCommands(methods, device);
                 }
             }
             return 0;
         }
-
-        int ShowMethods(Dictionary<string,MethodInfo> methodsDict, Device device)
+        int ShowCommands(List<Command> commands, Device device)
         {
             Console.Clear();
             Console.WriteLine($"Device {device.Name} has this commands:");
             int i = 1;
-            foreach (var item in methodsDict)
+            foreach (var item in commands)
             {
-                Console.WriteLine($"{i}. {item.Key}");
+                Console.WriteLine($"{i}. {item.Name}");
                 i++;
             }
             Console.WriteLine("Please type number of command to execute it, or type \"b\" to go back");
@@ -108,10 +98,9 @@ namespace CandidateRepo.Classes
             {
                 string input = Console.ReadLine();
                 if (input.ToLower() == "b") return 1;
-                if ((Int32.TryParse(input, out int result)) && (result <= methodsDict.Count) && (result > 0))
+                if ((Int32.TryParse(input, out int result)) && (result <= commands.Count) && (result > 0))
                 {
-                    var method = methodsDict.Values.ToList()[result - 1];
-                    device.ExecuteMethod(method);
+                    commands[result - 1].Execute();
                     Console.WriteLine("\nComand completed. Please type the nubmer of new command, or type \"b\" to go back");
                 }
             }
@@ -127,7 +116,7 @@ namespace CandidateRepo.Classes
                 int i = 1;
                 foreach (var item in types)
                 {
-                    Console.WriteLine($"{i}. {item.CustomAttributes.ToList()[0].ConstructorArguments.ToList()[0].Value.ToString()}");
+                    Console.WriteLine($"{i}. {item.Name}");
                     i++;
                 }
 
@@ -163,6 +152,7 @@ namespace CandidateRepo.Classes
                     return 0;
                 }
             }
+
         }
     }
 }

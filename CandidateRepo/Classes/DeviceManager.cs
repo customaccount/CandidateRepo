@@ -11,15 +11,19 @@ namespace CandidateRepo.Classes
     {
         List<IBaseDevice> _devices;
         static DeviceManager _deviceManagerInstance;
+        private static object syncRoot = new Object();
 
         public static IDeviceManager GetDeviceManager()
         {
             if (_deviceManagerInstance == null)
             {
-                _deviceManagerInstance = new DeviceManager();
-                return _deviceManagerInstance;
+                lock (syncRoot)
+                {
+                    if (_deviceManagerInstance == null)
+                        _deviceManagerInstance = new DeviceManager();
+                }
             }
-            else return _deviceManagerInstance;
+            return _deviceManagerInstance;
         }
 
         private DeviceManager()
@@ -34,7 +38,7 @@ namespace CandidateRepo.Classes
         public IBaseDevice CreateDevice(Type type, string name)
         {
             var constructors = type.GetConstructors().ToList();
-            var device = constructors.ToList()[0].Invoke(new object[] { name , _deviceManagerInstance});
+            var device = constructors.ToList()[0].Invoke(new object[] { name, _deviceManagerInstance });
             _devices.Add(device as IBaseDevice);
             return device as Device;
         }
@@ -46,11 +50,7 @@ namespace CandidateRepo.Classes
 
         public IEnumerable<Type> GetDevicesTypes()
         {
-            Type myType = Type.GetType("CandidateRepo.AbstractClasses.Device", false, true);
-            var assembly = Assembly.GetAssembly(myType);
-            var types = assembly.GetTypes().Where(t => t.CustomAttributes.ToList().Count > 0);
-            types = types.Where(t => t.CustomAttributes.ToList()[0].ConstructorArguments.ToList().Count > 0).ToList();
-            return types.ToList();
+            return new List<Type>() { typeof(SmartLightSystem), typeof(Humidifier), typeof(TermControlSystem) };
         }
 
         public void InitializeDevices()

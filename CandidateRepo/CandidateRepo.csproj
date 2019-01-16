@@ -43,12 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\Command.cs" />
     <Compile Include="AbstractClasses\Device.cs" />
+    <Compile Include="AbstractClasses\Visitor.cs" />
+    <Compile Include="Classes\Commands\EvaporateCommand.cs" />
+    <Compile Include="Classes\Commands\FastFreezeCommand.cs" />
+    <Compile Include="Classes\Commands\GetCurrentStateCommand.cs" />
+    <Compile Include="Classes\Commands\LightsOffCommand.cs" />
+    <Compile Include="Classes\Commands\LightsOnCommand.cs" />
+    <Compile Include="Classes\Commands\RebootCommand.cs" />
+    <Compile Include="Classes\Commands\RegisterDeviceCommand.cs" />
+    <Compile Include="Classes\Commands\UpdateParamsCommand.cs" />
     <Compile Include="Classes\ConsoleInterface.cs" />
     <Compile Include="Classes\DeviceManager.cs" />
+    <Compile Include="Classes\Dispetcher.cs" />
     <Compile Include="Classes\Hub.cs" />
     <Compile Include="Classes\Humidifier.cs" />
-    <Compile Include="Classes\NameAttribute.cs" />
     <Compile Include="Classes\SmartLightSystem.cs" />
     <Compile Include="Classes\TermControlSystem.cs" />
     <Compile Include="Interfaces\IBaseDevice.cs" />

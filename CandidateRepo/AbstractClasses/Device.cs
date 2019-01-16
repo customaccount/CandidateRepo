@@ -14,16 +14,15 @@ namespace CandidateRepo.AbstractClasses
         protected string State { get; set; }
         protected string Params { get; set; }
 
-        [Name("Reboot")]
+        public abstract List<Command> GetCommands(Visitor visitor);
+
         public void Reboot()
         {
             Console.WriteLine($"Device {Name} rebooted...");
         }
 
-        [Name("GetCurrentState")]
         public abstract void GetCurrentState();
 
-        [Name("RegisterDevice")]
         public virtual void RegisterDevice()
         {
             bool complete = false;
@@ -46,7 +45,6 @@ namespace CandidateRepo.AbstractClasses
             }
         }
 
-        [Name("UpdateParams")]
         public virtual void UpdateParams()
         {
             Console.WriteLine($"Current param is {Params}.\nPlease input new param.");
@@ -60,31 +58,5 @@ namespace CandidateRepo.AbstractClasses
             _deviceManager = manager;
         }
 
-        public Dictionary<string,MethodInfo> GetMethods()
-        {
-            Type type = this.GetType();
-            var methods = type.GetMethods().Where(m => (m.CustomAttributes.ToList().Count > 0)).ToList();
-            Dictionary<string, MethodInfo> result = new Dictionary<string, MethodInfo>();
-            foreach (var item in methods)
-            {
-                var ca = item.CustomAttributes.ToList();
-                foreach (var attr in ca)
-                {
-                    if (attr.AttributeType.FullName == "CandidateRepo.Classes.NameAttribute")
-                    {
-                        string methodName = attr.ConstructorArguments[0].Value.ToString();
-                        result.Add(methodName, item);
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        public int ExecuteMethod(MethodInfo method)
-        {
-            method.Invoke(this, null);
-            return 0;
-        }
     }
 }
