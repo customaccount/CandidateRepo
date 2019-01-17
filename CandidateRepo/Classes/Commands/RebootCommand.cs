@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class RebootCommand : Command
     {
-        Device receiver;
-        public RebootCommand(Device device)
+        IBaseDevice receiver;
+        public RebootCommand(IBaseDevice device)
         {
             receiver = device;
             Name = "Reboot";

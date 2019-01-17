@@ -1,4 +1,7 @@
-﻿namespace CandidateRepo.Interfaces
+﻿using CandidateRepo.AbstractClasses;
+using System.Collections.Generic;
+
+namespace CandidateRepo.Interfaces
 {
     public interface IBaseDevice
     {
@@ -11,5 +14,7 @@
         void UpdateParams();
 
         void RegisterDevice();
+
+        List<Command> GetCommands();
     }
 }

@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class UpdateParamsCommand : Command
     {
-        Device receiver;
-        public UpdateParamsCommand(Device device)
+        IBaseDevice receiver;
+        public UpdateParamsCommand(IBaseDevice device)
         {
             receiver = device;
             Name = "UpdateParams";

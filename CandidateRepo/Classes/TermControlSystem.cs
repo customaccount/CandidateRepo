@@ -1,4 +1,5 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Classes.Commands;
 using CandidateRepo.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,19 @@ namespace CandidateRepo.Classes
             Console.WriteLine($"FastFreeze started on device {Name}");
         }
 
+        public override List<Command> GetCommands()
+        {
+            var commands = new List<Command>();
+            commands.AddRange(new List<Command>()
+                    {
+                        new GetCurrentStateCommand(this),
+                        new RebootCommand(this),
+                        new UpdateParamsCommand(this),
+                        new RegisterDeviceCommand(this),
+                        new FastFreezeCommand(this)
+                    });
+
+            return commands;
+        }
     }
 }

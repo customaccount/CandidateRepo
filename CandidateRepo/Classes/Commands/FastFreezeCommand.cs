@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class FastFreezeCommand : Command
     {
-        TermControlSystem receiver;
-        public FastFreezeCommand(TermControlSystem device)
+        ITermControlSystem receiver;
+        public FastFreezeCommand(ITermControlSystem device)
         {
             receiver = device;
             Name = "FastFreeze";

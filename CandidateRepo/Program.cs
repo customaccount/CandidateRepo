@@ -1,4 +1,5 @@
-﻿using CandidateRepo.Classes;
+﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Classes;
 using CandidateRepo.Interfaces;
 
 namespace CandidateRepo

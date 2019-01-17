@@ -77,7 +77,7 @@ namespace CandidateRepo.Classes
                 int showMethodsresult = 0;
                 while (showMethodsresult == 0)
                 {
-                    var methods = device.GetCommands(new Dispetcher(device));
+                    var methods = new Dispetcher(device).GetCommands();
                     showMethodsresult = ShowCommands(methods, device);
                 }
             }

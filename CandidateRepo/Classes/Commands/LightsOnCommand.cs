@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class LightsOnCommand : Command
     {
-        SmartLightSystem receiver;
-        public LightsOnCommand(SmartLightSystem device)
+        ISmartLightSystem receiver;
+        public LightsOnCommand(ISmartLightSystem device)
         {
             receiver = device;
             Name = "LightsOn";

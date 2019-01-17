@@ -1,12 +1,13 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class GetCurrentStateCommand : Command
     {
 
-        Device receiver;
-        public GetCurrentStateCommand(Device device)
+        IBaseDevice receiver;
+        public GetCurrentStateCommand(IBaseDevice device)
         {
             receiver = device;
             Name = "GetCurrentState";

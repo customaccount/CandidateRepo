@@ -14,10 +14,7 @@ namespace CandidateRepo.AbstractClasses
         protected string State { get; set; }
         protected string Params { get; set; }
 
-        public List<Command> GetCommands(Visitor visitor)
-        {
-            return visitor.GetCommands();
-        }
+        public abstract List<Command> GetCommands();
 
         public virtual void Reboot()
         {

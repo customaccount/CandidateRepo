@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class RegisterDeviceCommand : Command
     {
-        Device receiver;
-        public RegisterDeviceCommand(Device device)
+        IBaseDevice receiver;
+        public RegisterDeviceCommand(IBaseDevice device)
         {
             receiver = device;
             Name = "RegisterDevice";

@@ -1,11 +1,12 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Interfaces;
 
 namespace CandidateRepo.Classes.Commands
 {
     class EvaporateCommand : Command
     {
-        Humidifier receiver;
-        public EvaporateCommand(Humidifier device)
+        IHumidifier receiver;
+        public EvaporateCommand(IHumidifier device)
         {
             receiver = device;
             Name = "Evaporate";

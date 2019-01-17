@@ -1,4 +1,5 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Classes.Commands;
 using CandidateRepo.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,21 @@ namespace CandidateRepo.Classes
         public override void GetCurrentState()
         {
             Console.WriteLine($"Currently state: {State}");
+        }
+
+        public override List<Command> GetCommands()
+        {
+            var commands = new List<Command>();
+            commands.AddRange(new List<Command>()
+                    {
+                        new GetCurrentStateCommand(this),
+                        new RebootCommand(this),
+                        new UpdateParamsCommand(this),
+                        new RegisterDeviceCommand(this),
+                        new EvaporateCommand(this)
+                    });
+
+            return commands;
         }
     }
 }
