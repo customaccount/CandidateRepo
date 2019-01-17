@@ -24,9 +24,5 @@ namespace CandidateRepo.Classes
             Console.WriteLine($"FastFreeze started on device {Name}");
         }
 
-        public override List<Command> GetCommands(Visitor visitor)
-        {
-            return visitor.GetCommandsForTermControlSystem(this);
-        }
     }
 }

@@ -14,9 +14,12 @@ namespace CandidateRepo.AbstractClasses
         protected string State { get; set; }
         protected string Params { get; set; }
 
-        public abstract List<Command> GetCommands(Visitor visitor);
+        public List<Command> GetCommands(Visitor visitor)
+        {
+            return visitor.GetCommands();
+        }
 
-        public void Reboot()
+        public virtual void Reboot()
         {
             Console.WriteLine($"Device {Name} rebooted...");
         }

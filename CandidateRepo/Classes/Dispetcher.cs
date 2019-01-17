@@ -15,47 +15,54 @@ namespace CandidateRepo.Classes
             commands = new List<Command>();
         }
 
-        public override List<Command> GetCommandsForHumidifier(Humidifier device)
+
+        public override List<Command> GetCommands()
         {
-            commands.AddRange(new List<Command>()
+            if (_currentDevice.GetType() == typeof(Humidifier))
             {
-                new GetCurrentStateCommand(device),
-                new RebootCommand(device),
-                new UpdateParamsCommand(device),
-                new RegisterDeviceCommand(device),
-                new EvaporateCommand(device)
-            });
+                commands.AddRange(new List<Command>()
+                    {
+                        new GetCurrentStateCommand(_currentDevice),
+                        new RebootCommand(_currentDevice),
+                        new UpdateParamsCommand(_currentDevice),
+                        new RegisterDeviceCommand(_currentDevice),
+                        new EvaporateCommand(_currentDevice as Humidifier)
+                    });
+
+                return commands;
+            }
+
+            if (_currentDevice.GetType() == typeof(SmartLightSystem))
+            {
+                commands.AddRange(new List<Command>()
+                {
+                    new GetCurrentStateCommand(_currentDevice),
+                    new RebootCommand(_currentDevice),
+                    new UpdateParamsCommand(_currentDevice),
+                    new RegisterDeviceCommand(_currentDevice),
+                    new LightsOnCommand(_currentDevice as SmartLightSystem),
+                    new LightsOffCommand(_currentDevice as SmartLightSystem),
+                });
+
+                return commands;
+            }
+
+            if (_currentDevice.GetType() == typeof(TermControlSystem))
+            {
+                commands.AddRange(new List<Command>()
+                    {
+                        new GetCurrentStateCommand(_currentDevice),
+                        new RebootCommand(_currentDevice),
+                        new UpdateParamsCommand(_currentDevice),
+                        new RegisterDeviceCommand(_currentDevice),
+                        new FastFreezeCommand(_currentDevice as TermControlSystem)
+                    });
+
+                return commands;
+            }
 
             return commands;
         }
 
-        public override List<Command> GetCommandsForLightSystem(SmartLightSystem device)
-        {
-            commands.AddRange(new List<Command>()
-            {
-                new GetCurrentStateCommand(device),
-                new RebootCommand(device),
-                new UpdateParamsCommand(device),
-                new RegisterDeviceCommand(device),
-                new LightsOnCommand(device),
-                new LightsOffCommand(device),
-            });
-
-            return commands;
-        }
-
-        public override List<Command> GetCommandsForTermControlSystem(TermControlSystem device)
-        {
-            commands.AddRange(new List<Command>()
-            {
-                new GetCurrentStateCommand(device),
-                new RebootCommand(device),
-                new UpdateParamsCommand(device),
-                new RegisterDeviceCommand(device),
-                new FastFreezeCommand(device)
-            });
-
-            return commands;
-        }
     }
 }

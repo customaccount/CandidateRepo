@@ -9,14 +9,14 @@ namespace CandidateRepo.Classes
     {
         public Humidifier(string name, IDeviceManager manager) : base(name, manager) { State = "Off"; }
 
-        public override List<Command> GetCommands(Visitor visitor)
-        {
-            return visitor.GetCommandsForHumidifier(this);
-        }
-
         public void Evaporate()
         {
             Console.WriteLine($"Humidifier {Name} is evaporating");
+        }
+
+        public override void Reboot()
+        {
+            Console.WriteLine($"Humidifier {Name} rebooted...");
         }
 
         public override void GetCurrentState()

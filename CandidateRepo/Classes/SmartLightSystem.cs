@@ -28,9 +28,5 @@ namespace CandidateRepo.Classes
             Console.WriteLine($"On device {Name} Lights became turned off");
         }
 
-        public override List<Command> GetCommands(Visitor visitor)
-        {
-            return visitor.GetCommandsForLightSystem(this);
-        }
     }
 }

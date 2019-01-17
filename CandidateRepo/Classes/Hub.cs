@@ -50,9 +50,5 @@ namespace CandidateRepo.Classes
             return _registeredDevices;
         }
 
-        public override List<Command> GetCommands(Visitor visitor)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
