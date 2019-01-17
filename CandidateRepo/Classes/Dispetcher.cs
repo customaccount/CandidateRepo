@@ -6,16 +6,9 @@ namespace CandidateRepo.Classes
 {
     public class Dispetcher : Visitor
     {
-        IBaseDevice _currentDevice;
-
-        public Dispetcher(IBaseDevice device)
+        public override List<Command> GetCommands(IBaseDevice device)
         {
-            _currentDevice = device;
-        }
-
-        public override List<Command> GetCommands()
-        {
-            return _currentDevice.GetCommands();
+            return device.GetCommands();
         }
     }
 }

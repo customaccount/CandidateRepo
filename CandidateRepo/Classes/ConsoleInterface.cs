@@ -10,10 +10,12 @@ namespace CandidateRepo.Classes
     class ConsoleInterface : IConsoleInterface
     {
         IDeviceManager _deviceManager;
+        Visitor _visitor;
 
         public ConsoleInterface(IDeviceManager deviceManager)
         {
             _deviceManager = deviceManager;
+            _visitor = new Dispetcher();
         }
 
         public void StartInterface()
@@ -77,7 +79,7 @@ namespace CandidateRepo.Classes
                 int showMethodsresult = 0;
                 while (showMethodsresult == 0)
                 {
-                    var methods = new Dispetcher(device).GetCommands();
+                    var methods = _visitor.GetCommands(device);
                     showMethodsresult = ShowCommands(methods, device);
                 }
             }
