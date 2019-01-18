@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F9C1120-08DF-4E73-889B-885461F47E68}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CandidateRepo</RootNamespace>
+    <AssemblyName>CandidateRepo</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractClasses\Command.cs" />
+    <Compile Include="AbstractClasses\Device.cs" />
+    <Compile Include="AbstractClasses\Visitor.cs" />
+    <Compile Include="Classes\Commands\EvaporateCommand.cs" />
+    <Compile Include="Classes\Commands\FastFreezeCommand.cs" />
+    <Compile Include="Classes\Commands\GetCurrentStateCommand.cs" />
+    <Compile Include="Classes\Commands\LightsOffCommand.cs" />
+    <Compile Include="Classes\Commands\LightsOnCommand.cs" />
+    <Compile Include="Classes\Commands\RebootCommand.cs" />
+    <Compile Include="Classes\Commands\RegisterDeviceCommand.cs" />
+    <Compile Include="Classes\Commands\UpdateParamsCommand.cs" />
+    <Compile Include="Classes\ConsoleInterface.cs" />
+    <Compile Include="Classes\DeviceManager.cs" />
+    <Compile Include="Classes\Dispetcher.cs" />
+    <Compile Include="Classes\Hub.cs" />
+    <Compile Include="Classes\Humidifier.cs" />
+    <Compile Include="Classes\SmartLightSystem.cs" />
+    <Compile Include="Classes\TermControlSystem.cs" />
+    <Compile Include="Interfaces\IBaseDevice.cs" />
+    <Compile Include="Interfaces\IConsoleInterface.cs" />
+    <Compile Include="Interfaces\IDeviceManager.cs" />
+    <Compile Include="Interfaces\IHub.cs" />
+    <Compile Include="Interfaces\IHumidifier.cs" />
+    <Compile Include="Interfaces\ISmartLightSystem.cs" />
+    <Compile Include="Interfaces\ITermControlSystem.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
