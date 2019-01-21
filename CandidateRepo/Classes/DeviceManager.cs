@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CandidateRepo.Classes
 {
-    class DeviceManager : IDeviceManager
+    public class DeviceManager : IDeviceManager
     {
         List<IBaseDevice> _devices;
         static DeviceManager _deviceManagerInstance;
@@ -30,9 +30,6 @@ namespace CandidateRepo.Classes
         {
             _deviceManagerInstance = this;
             _devices = new List<IBaseDevice>();
-            Console.ForegroundColor = ConsoleColor.Black;
-            InitializeDevices();
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public IBaseDevice CreateDevice(Type type, string name)

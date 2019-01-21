@@ -82,3 +82,7 @@ packages/
 
 
 .vs/CandidateRepo/
+*.props
+NUnitTestCandidateRepo/bin/
+NUnitTestCandidateRepo/obj/
+
