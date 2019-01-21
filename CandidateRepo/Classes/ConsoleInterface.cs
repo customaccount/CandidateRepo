@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity;
 
 namespace CandidateRepo.Classes
 {
@@ -12,10 +13,10 @@ namespace CandidateRepo.Classes
         IDeviceManager _deviceManager;
         Visitor _visitor;
 
-        public ConsoleInterface(IDeviceManager deviceManager)
+        public ConsoleInterface(IDeviceManager deviceManager, Visitor visitor)
         {
             _deviceManager = deviceManager;
-            _visitor = new Dispetcher();
+            _visitor = visitor;
         }
 
         public void StartInterface()
@@ -85,6 +86,7 @@ namespace CandidateRepo.Classes
             }
             return 0;
         }
+
         int ShowCommands(List<Command> commands, Device device)
         {
             Console.Clear();
@@ -155,6 +157,11 @@ namespace CandidateRepo.Classes
                 }
             }
 
+        }
+
+        public string GetUserInput()
+        {
+            return Console.ReadLine();
         }
     }
 }

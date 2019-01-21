@@ -1,4 +1,5 @@
 ﻿using CandidateRepo.AbstractClasses;
+using CandidateRepo.Classes.Commands;
 using CandidateRepo.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,16 @@ namespace CandidateRepo.Classes
 
         public override List<Command> GetCommands()
         {
-            throw new NotImplementedException();
+            var commands = new List<Command>();
+            commands.AddRange(new List<Command>()
+                    {
+                        new GetCurrentStateCommand(this),
+                        new RebootCommand(this),
+                        new UpdateParamsCommand(this),
+                        new RegisterDeviceCommand(this),
+                    });
+
+            return commands;
         }
     }
 }
